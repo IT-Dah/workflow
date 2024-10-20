@@ -28,6 +28,22 @@ export default [
     },
   },
 
+  // Configuration for Jest test files (to avoid no-undef errors for describe, it, expect, global, etc.)
+  {
+    files: ["**/*.test.js"], // Apply to all test files
+    languageOptions: {
+      globals: {
+        ...globals.jest, // Include Jest-specific globals like describe, it, expect
+        global: "readonly", // Define `global` as a valid variable in test files
+      },
+      ecmaVersion: "latest", // Latest ECMAScript version
+      sourceType: "module", // Use module syntax
+    },
+    rules: {
+      // Add any Jest-specific linting rules here if needed
+    },
+  },
+
   // Applying ESLint's recommended configuration for all JS files
   pluginJs.configs.recommended,
 ];

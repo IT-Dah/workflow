@@ -1,8 +1,14 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
+import cypressPlugin from "eslint-plugin-cypress";
 
 export default [
-  // Configuration for your regular JavaScript files (browser environment)
+  // Applying ESLint's recommended configuration globally
+  {
+    ...pluginJs.configs.recommended,
+  },
+
+  // Configuration for regular JavaScript files (browser environment)
   {
     files: ["src/**/*.js"],
     languageOptions: {
@@ -29,14 +35,30 @@ export default [
       globals: {
         ...globals.jest,
         global: "readonly",
-        window: "readonly", // Allowing window as a global
-        localStorage: "readonly", // Add this line to define `localStorage` as a global variable
+        window: "readonly",
+        localStorage: "readonly",
       },
       ecmaVersion: "latest",
       sourceType: "module",
     },
   },
 
-  // Applying ESLint's recommended configuration for all JS files
-  pluginJs.configs.recommended,
+  // Configuration for Cypress test files
+  {
+    files: ["cypress/**/*.js"],
+    plugins: {
+      cypress: cypressPlugin,
+    },
+    languageOptions: {
+      globals: {
+        ...globals.cypress,
+        cy: "readonly", // Add `cy` explicitly here as a global variable
+      },
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+    rules: {
+      "cypress/no-unnecessary-waiting": "error", // Example rule for Cypress
+    },
+  },
 ];

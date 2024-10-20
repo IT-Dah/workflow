@@ -35,6 +35,7 @@ export default [
       globals: {
         ...globals.jest, // Include Jest-specific globals like describe, it, expect
         global: "readonly", // Define `global` as a valid variable in test files
+        localStorage: "readonly", // Define `localStorage` as a valid variable in test files
       },
       ecmaVersion: "latest", // Latest ECMAScript version
       sourceType: "module", // Use module syntax

@@ -1,4 +1,4 @@
-import { login } from "./login";
+import { login } from "../src/js/api/auth/login";
 
 describe("login function", () => {
   it("should store a token when provided with valid credentials", () => {

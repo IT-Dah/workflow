@@ -4,44 +4,36 @@ import pluginJs from "@eslint/js";
 export default [
   // Configuration for your regular JavaScript files (browser environment)
   {
-    files: ["src/**/*.js"], // Example for JS files in src/
+    files: ["src/**/*.js"],
     languageOptions: {
-      globals: globals.browser, // Using the browser globals for the source files
-      ecmaVersion: "latest", // Latest ECMAScript version
-      sourceType: "module", // Using ECMAScript modules
-    },
-    rules: {
-      // Add any specific rules here if necessary
+      globals: globals.browser,
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
   },
 
   // Configuration for jest.config.js (Node.js environment)
   {
-    files: ["jest.config.js"], // Target jest.config.js specifically
+    files: ["jest.config.js"],
     languageOptions: {
-      globals: globals.node, // Enable Node.js globals like `module`
-      ecmaVersion: "latest", // Use latest ECMAScript
-      sourceType: "module", // Use module syntax
-    },
-    rules: {
-      // Add any specific rules here if necessary
+      globals: globals.node,
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
   },
 
-  // Configuration for Jest test files (to avoid no-undef errors for describe, it, expect, global, etc.)
+  // Configuration for Jest test files
   {
-    files: ["**/*.test.js"], // Apply to all test files
+    files: ["**/*.test.js"],
     languageOptions: {
       globals: {
-        ...globals.jest, // Include Jest-specific globals like describe, it, expect
-        global: "readonly", // Define `global` as a valid variable in test files
-        localStorage: "readonly", // Define `localStorage` as a valid variable in test files
+        ...globals.jest,
+        global: "readonly",
+        window: "readonly", // Allowing window as a global
+        localStorage: "readonly", // Add this line to define `localStorage` as a global variable
       },
-      ecmaVersion: "latest", // Latest ECMAScript version
-      sourceType: "module", // Use module syntax
-    },
-    rules: {
-      // Add any Jest-specific linting rules here if needed
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
   },
 

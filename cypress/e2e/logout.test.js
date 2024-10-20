@@ -1,4 +1,4 @@
-import { logout } from "../src/js/api/auth/logout";
+import { logout } from "../../src/js/api/auth/logout";
 
 describe("logout function", () => {
   it("should clear the token from localStorage", () => {

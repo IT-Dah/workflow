@@ -1,4 +1,4 @@
-import { login } from "../src/js/api/auth/login"; // Adjust the path according to your project structure
+import { login } from "../../src/js/api/auth/login"; // Adjust the path according to your project structure
 
 // Mocking localStorage
 beforeAll(() => {

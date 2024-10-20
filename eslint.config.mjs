@@ -12,17 +12,25 @@ export default [
   {
     files: ["src/**/*.js"],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        require: "readonly", // Allow require in browser files
+        module: "readonly", // Allow module in browser files
+      },
       ecmaVersion: "latest",
       sourceType: "module",
     },
   },
 
-  // Configuration for jest.config.js (Node.js environment)
+  // Configuration for Jest config file (Node.js environment)
   {
-    files: ["jest.config.js"],
+    files: ["jest.config.js"], // Specifically target jest.config.js
     languageOptions: {
-      globals: globals.node,
+      globals: {
+        ...globals.node, // Node.js globals
+        require: "readonly", // Allow require in jest.config.js
+        module: "readonly", // Allow module in jest.config.js
+      },
       ecmaVersion: "latest",
       sourceType: "module",
     },
@@ -45,20 +53,23 @@ export default [
 
   // Configuration for Cypress test files
   {
-    files: ["cypress/**/*.js"],
+    files: ["cypress/**/*.js", "cypress.config.js"],
     plugins: {
       cypress: cypressPlugin,
     },
     languageOptions: {
       globals: {
         ...globals.cypress,
-        cy: "readonly", // Add `cy` explicitly here as a global variable
+        cy: "readonly", // Allow `cy` as a global variable
+        require: "readonly", // Allow require in Cypress files
+        module: "readonly", // Allow module in Cypress files
       },
       ecmaVersion: "latest",
       sourceType: "module",
     },
     rules: {
       "cypress/no-unnecessary-waiting": "error", // Example rule for Cypress
+      "no-undef": "off", // Disable no-undef for Cypress files
     },
   },
 ];

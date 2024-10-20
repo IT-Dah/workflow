@@ -10,9 +10,11 @@ export async function loginListener(event) {
 
   try {
     const { name } = await auth.login(email, password);
+    console.log(`Logged in successfully as: ${name}`); // Debugging log
     updateLoginVisibility();
     location.href = `./?view=profile&name=${name}`;
-  } catch {
+  } catch (error) {
+    console.error("Login error:", error); // Log the error for more details
     return alert(
       "Either your username was not found or your password is incorrect",
     );
